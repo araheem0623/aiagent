@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KunFyaAI - Custom AI Agents for Business</title>
+    <title>KunFyaAI - Custom AI Agents for Business Growth</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
         * {
@@ -14,7 +14,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0a;
+            background: #0a0b0d;
             color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
@@ -26,16 +26,37 @@
             padding: 0 24px;
         }
 
+        /* Cybersphere-inspired background patterns */
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 25% 25%, #0ea5e9 1px, transparent 1px),
+                radial-gradient(circle at 75% 75%, #06b6d4 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(10px, -10px) rotate(1deg); }
+            66% { transform: translate(-5px, 5px) rotate(-1deg); }
+        }
+
         /* Header */
         header {
-            background: rgba(10, 10, 10, 0.9);
+            background: rgba(10, 11, 13, 0.95);
             backdrop-filter: blur(20px);
             padding: 20px 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(14, 165, 233, 0.2);
         }
 
         nav {
@@ -47,7 +68,7 @@
         .logo {
             font-size: 24px;
             font-weight: 700;
-            color: #ffffff;
+            color: #0ea5e9;
             letter-spacing: -0.5px;
         }
 
@@ -63,18 +84,33 @@
             font-weight: 500;
             font-size: 15px;
             transition: color 0.3s ease;
+            position: relative;
         }
 
         .nav-links a:hover {
-            color: #ffffff;
+            color: #0ea5e9;
+        }
+
+        .nav-links a.active {
+            color: #0ea5e9;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #0ea5e9;
         }
 
         .cta-button {
-            background: #ffffff;
-            color: #000000;
+            background: #0ea5e9;
+            color: #ffffff;
             padding: 12px 24px;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
             font-size: 14px;
             cursor: pointer;
@@ -84,8 +120,9 @@
         }
 
         .cta-button:hover {
-            background: rgba(255, 255, 255, 0.9);
+            background: #0284c7;
             transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
         }
 
         /* Hero Section */
@@ -93,35 +130,22 @@
             padding: 160px 0 120px;
             text-align: center;
             position: relative;
-            background: radial-gradient(ellipse at center, rgba(79, 70, 229, 0.15) 0%, transparent 70%);
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.3;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a"><stop offset="0%" stop-color="%234f46e5"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs><circle cx="500" cy="300" r="200" fill="url(%23a)"/><circle cx="200" cy="700" r="150" fill="url(%23a)" opacity="0.5"/><circle cx="800" cy="600" r="100" fill="url(%23a)" opacity="0.3"/></svg>') center/cover;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(14, 165, 233, 0.1);
+            border: 1px solid rgba(14, 165, 233, 0.3);
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 14px;
             margin-bottom: 24px;
             backdrop-filter: blur(10px);
+            color: #0ea5e9;
+            font-weight: 600;
         }
 
         .hero h1 {
@@ -132,9 +156,13 @@
             line-height: 1.1;
         }
 
+        .hero h1 .highlight {
+            color: #0ea5e9;
+        }
+
         .hero-subtitle {
             font-size: 20px;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.7);
             margin-bottom: 40px;
             max-width: 600px;
             margin-left: auto;
@@ -151,11 +179,11 @@
         }
 
         .primary-button {
-            background: #ffffff;
-            color: #0a0a0a;
+            background: #0ea5e9;
+            color: #ffffff;
             padding: 16px 32px;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
             font-size: 16px;
             cursor: pointer;
@@ -165,9 +193,9 @@
         }
 
         .primary-button:hover {
-            background: rgba(255, 255, 255, 0.9);
+            background: #0284c7;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
         }
 
         .secondary-button {
@@ -175,7 +203,7 @@
             color: #ffffff;
             padding: 16px 32px;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
             font-size: 16px;
             cursor: pointer;
@@ -185,8 +213,9 @@
         }
 
         .secondary-button:hover {
-            border-color: rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.1);
+            border-color: #0ea5e9;
+            background: rgba(14, 165, 233, 0.1);
+            color: #0ea5e9;
         }
 
         /* Stats Section */
@@ -195,25 +224,40 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+        .stats-title {
             text-align: center;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 48px;
+            color: #0ea5e9;
         }
 
-        .stat-item {
-            padding: 20px;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-card {
+            background: rgba(14, 165, 233, 0.05);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 12px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(14, 165, 233, 0.4);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.1);
         }
 
         .stat-number {
-            font-size: 48px;
+            font-size: 36px;
             font-weight: 700;
             margin-bottom: 8px;
-            background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.7));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #0ea5e9;
         }
 
         .stat-label {
@@ -225,6 +269,7 @@
         /* Features Section */
         .features {
             padding: 120px 0;
+            position: relative;
         }
 
         .section-header {
@@ -234,10 +279,11 @@
 
         .section-number {
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.5);
-            font-weight: 600;
+            color: #0ea5e9;
+            font-weight: 700;
             margin-bottom: 16px;
             letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .section-title {
@@ -258,30 +304,61 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 32px;
             margin-top: 60px;
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+            border-radius: 12px;
             padding: 32px;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #0ea5e9, #06b6d4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .feature-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(14, 165, 233, 0.3);
+            background: rgba(14, 165, 233, 0.05);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 20px;
         }
 
         .feature-title {
             font-size: 20px;
             font-weight: 600;
             margin-bottom: 12px;
+            color: #ffffff;
         }
 
         .feature-description {
@@ -293,13 +370,14 @@
         .demo {
             padding: 120px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
         }
 
         .demo-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
-            align-items: center;
+            align-items: start;
         }
 
         .demo-content h3 {
@@ -317,24 +395,40 @@
         }
 
         .chatbot-demo {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 12px;
             overflow: hidden;
             backdrop-filter: blur(10px);
         }
 
         .chat-header {
-            background: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
             padding: 16px 24px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-status {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         .chat-messages {
-            height: 300px;
+            height: 350px;
             overflow-y: auto;
             padding: 24px;
+            background: rgba(10, 11, 13, 0.5);
         }
 
         .message {
@@ -344,34 +438,75 @@
             max-width: 85%;
             font-size: 14px;
             line-height: 1.4;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .user-message {
             background: rgba(255, 255, 255, 0.1);
             margin-left: auto;
             text-align: right;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .bot-message {
-            background: rgba(79, 70, 229, 0.3);
-            border: 1px solid rgba(79, 70, 229, 0.4);
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(6, 182, 212, 0.1));
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            color: #ffffff;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 12px 16px;
+            background: rgba(14, 165, 233, 0.1);
+            border-radius: 12px;
+            max-width: 85%;
+            margin-bottom: 16px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: #0ea5e9;
+            border-radius: 50%;
+            animation: typing 1.4s ease-in-out infinite;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
         }
 
         .chat-input {
             display: flex;
             padding: 16px 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(14, 165, 233, 0.2);
             gap: 12px;
+            background: rgba(10, 11, 13, 0.8);
         }
 
         .chat-input input {
             flex: 1;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 12px 16px;
             color: #ffffff;
             font-size: 14px;
+            transition: border-color 0.3s ease;
         }
 
         .chat-input input::placeholder {
@@ -380,18 +515,23 @@
 
         .chat-input input:focus {
             outline: none;
-            border-color: rgba(255, 255, 255, 0.4);
+            border-color: #0ea5e9;
         }
 
         .chat-send {
-            background: #ffffff;
-            color: #0a0a0a;
+            background: #0ea5e9;
+            color: #ffffff;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 12px 16px;
             font-weight: 600;
             cursor: pointer;
             font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .chat-send:hover {
+            background: #0284c7;
         }
 
         /* Charts */
@@ -401,27 +541,98 @@
         }
 
         .chart-container {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 12px;
             padding: 40px;
             margin-top: 40px;
             backdrop-filter: blur(10px);
         }
 
-        /* Trial Section */
-        .trial {
+        /* Pricing Section */
+        .pricing {
             padding: 120px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .trial-form {
-            max-width: 500px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+        .pricing-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+            margin-top: 60px;
+        }
+
+        .pricing-content h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .pricing-list {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .pricing-list li {
+            padding: 12px 0;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pricing-list li::before {
+            content: '✓';
+            color: #0ea5e9;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .price-guarantee {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 193, 7, 0.05));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 32px;
+        }
+
+        .price-guarantee h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #ffd700;
+        }
+
+        .price-guarantee p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        .pricing-form {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 12px;
             padding: 40px;
             backdrop-filter: blur(10px);
+        }
+
+        .form-header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .form-header h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #0ea5e9;
+        }
+
+        .form-header p {
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .form-group {
@@ -436,32 +647,48 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        .form-group input {
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
             width: 100%;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 16px;
             color: #ffffff;
             font-size: 16px;
             transition: border-color 0.3s ease;
+            font-family: inherit;
         }
 
-        .form-group input::placeholder {
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
             color: rgba(255, 255, 255, 0.5);
         }
 
-        .form-group input:focus {
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
-            border-color: rgba(255, 255, 255, 0.4);
+            border-color: #0ea5e9;
+        }
+
+        .form-group select option {
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
         }
 
         .submit-btn {
             width: 100%;
-            background: #ffffff;
-            color: #0a0a0a;
+            background: #0ea5e9;
+            color: #ffffff;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 16px;
             font-weight: 600;
             font-size: 16px;
@@ -470,8 +697,25 @@
         }
 
         .submit-btn:hover {
-            background: rgba(255, 255, 255, 0.9);
+            background: #0284c7;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+        }
+
+        /* Trial Section */
+        .trial {
+            padding: 120px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .trial-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
         }
 
         /* Footer */
@@ -479,10 +723,16 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding: 60px 0;
             text-align: center;
+            background: rgba(10, 11, 13, 0.8);
         }
 
         .footer-content {
             color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-content .logo {
+            margin-bottom: 16px;
+            font-size: 20px;
         }
 
         /* Modal */
@@ -499,11 +749,11 @@
         }
 
         .modal-content {
-            background: rgba(10, 10, 10, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(10, 11, 13, 0.95);
+            border: 1px solid rgba(14, 165, 233, 0.3);
             margin: 15% auto;
             padding: 40px;
-            border-radius: 16px;
+            border-radius: 12px;
             width: 90%;
             max-width: 500px;
             position: relative;
@@ -511,7 +761,7 @@
         }
 
         .modal-content h2 {
-            color: #ffffff;
+            color: #0ea5e9;
             margin-bottom: 16px;
         }
 
@@ -526,10 +776,11 @@
             font-size: 24px;
             cursor: pointer;
             color: rgba(255, 255, 255, 0.6);
+            transition: color 0.3s ease;
         }
 
         .close:hover {
-            color: #ffffff;
+            color: #0ea5e9;
         }
 
         /* Responsive */
@@ -543,8 +794,25 @@
                 gap: 40px;
             }
             
+            .pricing-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
             .hero-cta {
                 flex-direction: column;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -558,45 +826,44 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(14, 165, 233, 0.5);
             border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(14, 165, 233, 0.7);
         }
     </style>
 </head>
 <body>
+    <div class="bg-pattern"></div>
+
     <!-- Header -->
     <header>
         <nav class="container">
             <div class="logo">KunFyaAI</div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#demo">Demo</a></li>
-                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#home" class="active">HOME</a></li>
+                <li><a href="#features">FEATURES</a></li>
+                <li><a href="#demo">DEMO</a></li>
+                <li><a href="#pricing">PRICING</a></li>
             </ul>
-            <a href="#trial" class="cta-button">Start Free Trial</a>
+            <a href="#trial" class="cta-button">START FREE TRIAL</a>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-background"></div>
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span>🥇</span>
-                    <span>Custom AI Solutions</span>
-                </div>
-                <h1>The #1 AI Agent<br>for Business Growth</h1>
-                <p class="hero-subtitle">Custom AI phone agents and chatbots that work 24/7. Never miss a call, never lose a sale. Built specifically for your business needs.</p>
-                <div class="hero-cta">
-                    <a href="#trial" class="primary-button">Start Free Trial</a>
-                    <a href="#demo" class="secondary-button">See Demo</a>
-                </div>
+            <div class="hero-badge">
+                <span>🚀</span>
+                <span>ENTERPRISE-GRADE AI SOLUTIONS</span>
+            </div>
+            <h1>AI Agents for<br><span class="highlight">Business Growth</span></h1>
+            <p class="hero-subtitle">KunFyaAI builds custom AI agents that automate customer support, boost productivity, and deliver smarter interactions 24/7 for your business.</p>
+            <div class="hero-cta">
+                <a href="#trial" class="primary-button">TALK TO US NOW</a>
+                <a href="#demo" class="secondary-button">SEE OUR DEMO</a>
             </div>
         </div>
     </section>
@@ -604,22 +871,23 @@
     <!-- Stats Section -->
     <section class="stats">
         <div class="container">
+            <h2 class="stats-title">Save Millions Annually</h2>
             <div class="stats-grid">
-                <div class="stat-item">
+                <div class="stat-card">
+                    <div class="stat-number">$500K+</div>
+                    <div class="stat-label">Reduce Security Team Costs</div>
+                </div>
+                <div class="stat-card">
                     <div class="stat-number">24/7</div>
-                    <div class="stat-label">Always Available</div>
+                    <div class="stat-label">Operations Without Overtime</div>
                 </div>
-                <div class="stat-item">
+                <div class="stat-card">
                     <div class="stat-number">85%</div>
-                    <div class="stat-label">Customer Satisfaction</div>
+                    <div class="stat-label">Customer Satisfaction Rate</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">60%</div>
-                    <div class="stat-label">Cost Reduction</div>
-                </div>
-                <div class="stat-item">
+                <div class="stat-card">
                     <div class="stat-number">100%</div>
-                    <div class="stat-label">Custom Solutions</div>
+                    <div class="stat-label">Custom AI Solutions</div>
                 </div>
             </div>
         </div>
@@ -631,151 +899,26 @@
             <div class="section-header">
                 <div class="section-number">01</div>
                 <h2 class="section-title">Complete AI capabilities.<br>Total control.</h2>
-                <p class="section-description">KunFyaAI builds custom AI agents specifically for your business. From phone calls to chat support, we handle it all with industry-leading performance.</p>
+                <p class="section-description">KunFyaAI builds custom AI agents specifically for your business needs. From phone calls to chat support, we handle everything with industry-leading performance.</p>
             </div>
             
             <div class="features-grid">
                 <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
                     <h3 class="feature-title">100% Custom AI Solutions</h3>
-                    <p class="feature-description">Every AI agent is built specifically for your business. No generic templates - we create AI that understands your industry, products, and customers perfectly.</p>
+                    <p class="feature-description">Every AI agent is built specifically for your business. We train on your data, processes, and industry knowledge - no generic templates.</p>
                 </div>
                 <div class="feature-card">
+                    <div class="feature-icon">📞</div>
                     <h3 class="feature-title">AI Phone & Chat Combined</h3>
-                    <p class="feature-description">Complete communication coverage with AI phone agents AND intelligent chatbots. Handle calls, appointments, orders, and support across all channels.</p>
+                    <p class="feature-description">Complete communication coverage with AI phone agents AND intelligent chatbots. Handle calls, appointments, orders, and support seamlessly.</p>
                 </div>
                 <div class="feature-card">
+                    <div class="feature-icon">💰</div>
                     <h3 class="feature-title">Price Match Guarantee</h3>
-                    <p class="feature-description">We match any competitor's pricing while delivering superior custom AI solutions. Get premium quality without premium prices.</p>
+                    <p class="feature-description">We match any competitor's pricing while delivering superior custom AI solutions. Premium quality without premium prices.</p>
                 </div>
                 <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
                     <h3 class="feature-title">Never Miss Business</h3>
-                    <p class="feature-description">Your AI agents work around the clock, capturing leads, taking orders, and booking appointments even when you're sleeping.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Demo Section -->
-    <section id="demo" class="demo">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-number">02</div>
-                <h2 class="section-title">See KunFyaAI in action</h2>
-            </div>
-            
-            <div class="demo-container">
-                <div class="demo-content">
-                    <h3>Interactive AI Demo</h3>
-                    <p>Try our AI assistant below. Ask about our services, pricing, or how we can help your business. This showcases the intelligence we build into every custom solution.</p>
-                    
-                    <div class="chart-container">
-                        <h4 style="margin-bottom: 24px; font-size: 18px;">Business Impact Analysis</h4>
-                        <canvas id="impactChart" width="400" height="200"></canvas>
-                    </div>
-                </div>
-                
-                <div class="chatbot-demo">
-                    <div class="chat-header">
-                        KunFyaAI Assistant
-                    </div>
-                    <div class="chat-messages" id="chatMessages">
-                        <div class="message bot-message">
-                            Hi! I'm a demo of KunFyaAI's custom AI technology. Ask me about our services, pricing, or how we can transform your business!
-                        </div>
-                    </div>
-                    <div class="chat-input">
-                        <input type="text" id="chatInput" placeholder="Ask me anything..." />
-                        <button class="chat-send" onclick="sendMessage()">Send</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Chart Section -->
-    <section class="chart-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-number">03</div>
-                <h2 class="section-title">ROI Comparison</h2>
-                <p class="section-description">See the dramatic difference AI automation makes for your business revenue and costs.</p>
-            </div>
-            <div class="chart-container">
-                <canvas id="roiChart" width="400" height="200"></canvas>
-            </div>
-        </div>
-    </section>
-
-    <!-- Trial Section -->
-    <section id="trial" class="trial">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-number">04</div>
-                <h2 class="section-title">Get the #1 AI agent<br>for your business</h2>
-                <p class="section-description">Start your free trial today. No commitment required. See how custom AI can transform your business in just 14 days.</p>
-            </div>
-            
-            <form class="trial-form" onsubmit="submitTrial(event)">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                </div>
-                <div class="form-group">
-                    <label for="company">Company Name</label>
-                    <input type="text" id="company" name="company" placeholder="Enter your company name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number (Optional)</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
-                </div>
-                <button type="submit" class="submit-btn">Start Free Trial</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="logo" style="margin-bottom: 16px; font-size: 20px;">KunFyaAI</div>
-                <p>Custom AI agents for business growth</p>
-                <p style="margin-top: 24px; font-size: 14px;">© 2025 KunFyaAI. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Success Modal -->
-    <div id="successModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Thank You!</h2>
-            <p>Your free trial request has been submitted successfully. We'll contact you within 24 hours to set up your custom AI demo.</p>
-        </div>
-    </div>
-
-    <script>
-        // Chatbot functionality
-        const chatMessages = document.getElementById('chatMessages');
-        const chatInput = document.getElementById('chatInput');
-
-        const responses = {
-            'hello': 'Hello! Welcome to KunFyaAI. How can I help you today?',
-            'hi': 'Hi there! I\'m here to answer questions about our custom AI solutions.',
-            'pricing': 'We offer competitive pricing starting at $297/month and match any competitor\'s rates! Our AI solutions include both phone agents and chatbots. Would you like to start a free trial?',
-            'price': 'We match any competitor\'s pricing! Our custom AI solutions start from $297/month. This includes both phone AI and chatbots tailored to your business. Ready for a free trial?',
-            'cost': 'Our pricing is competitive and we guarantee to match any legitimate competitor quote. Custom AI solutions start at $297/month. Want to see it in action with a free trial?',
-            'services': 'KunFyaAI creates 100% custom AI solutions including: 24/7 AI phone agents, intelligent website chatbots, appointment scheduling, order processing, and customer support - all customized for YOUR specific business needs!',
-            'phone': 'Our AI phone agents handle calls 24/7, take messages, book appointments, process orders, answer questions, and transfer important calls to you. They never miss a call and work exactly like your best employee!',
-            'chat': 'Our AI chatbots integrate seamlessly into your website, handling customer inquiries, capturing leads, providing product information, and guiding visitors through your sales funnel.',
-            'custom': 'Every AI we build is 100% custom for your business. We train it on your specific industry, products, services, policies, and processes. No generic templates - it\'s built specifically for YOUR business!',
-            'trial': 'Our free trial includes a fully custom AI demo built for your business, complete setup assistance, and 14 days of testing with no commitment. Ready to transform your business?',
-            'help': 'I can help you learn about our custom AI phone and chat solutions, competitive pricing (we match competitors!), free trial options, or answer specific questions about growing your business with AI.',
-            'benefits': 'AI agents help you: Capture every lead (never miss calls), reduce staffing costs, work 24/7, improve customer satisfaction, increase sales, and scale without hiring more people!',
-            'different': 'Unlike generic AI tools, we build completely custom solutions for YOUR specific business. We offer both phone AND chat AI, provide industry-specific training, and guarantee to match any competitor\'s pricing!',
-            'appointment': 'Our AI schedules appointments automatically by checking your calendar, asking qualifying questions, sending confirmations, handling rescheduling, and even sending reminders!',
-            'order': 'Yes! Our AI takes orders, processes payments, checks inventory, calculates totals, handles special requests, and sends confirmations - just like your best sales person.',
-            'support': 'Our AI provides instant 24/7 customer support, answering questions, troubleshooting issues, escalating complex problems to humans, and ensuring
+                    <p class="feature-description">Your AI agents work 24/7, capturing leads, taking orders, an
