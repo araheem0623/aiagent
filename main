@@ -1022,11 +1022,14 @@
                     </div>
                 </div>
                 
-                <form class="pricing-form" onsubmit="submitPricingInquiry(event)">
+                <form class="pricing-form" action="https://formspree.io/f/xgvyrjkr" method="POST" onsubmit="showSuccessModal(event)">
                     <div class="form-header">
                         <h3>Get Your Custom Quote</h3>
                         <p>Tell us about your business and we'll provide a personalized pricing proposal.</p>
                     </div>
+                    
+                    <!-- Hidden field to identify form type -->
+                    <input type="hidden" name="form_type" value="Pricing Inquiry">
                     
                     <div class="form-group">
                         <label for="pricingName">Full Name</label>
@@ -1048,15 +1051,15 @@
                         <label for="services">Services Needed</label>
                         <select id="services" name="services" required>
                             <option value="">Select services needed</option>
-                            <option value="phone-only">AI Phone Agents Only</option>
-                            <option value="chat-only">Website Chatbots Only</option>
-                            <option value="both">Both Phone & Chat AI</option>
-                            <option value="custom">Custom Solution</option>
+                            <option value="AI Phone Agents Only">AI Phone Agents Only</option>
+                            <option value="Website Chatbots Only">Website Chatbots Only</option>
+                            <option value="Both Phone & Chat AI">Both Phone & Chat AI</option>
+                            <option value="Custom Solution">Custom Solution</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="details">Tell us about your business needs</label>
-                        <textarea id="details" name="details" placeholder="Describe your business, current challenges, and what you'd like our AI to help with..." rows="4"></textarea>
+                        <textarea id="details" name="message" placeholder="Describe your business, current challenges, and what you'd like our AI to help with..." rows="4" required></textarea>
                     </div>
                     <button type="submit" class="submit-btn">Get My Custom Quote</button>
                 </form>
@@ -1073,11 +1076,14 @@
                 <p class="section-description">Experience the power of custom AI for your business. 14-day free trial with full setup and support included.</p>
             </div>
             
-            <form class="trial-form" onsubmit="submitTrial(event)">
+            <form class="trial-form" action="https://formspree.io/f/xgvyrjkr" method="POST" onsubmit="showSuccessModal(event)">
                 <div class="form-header">
                     <h3>Start Free Trial</h3>
                     <p>No commitment required. See how custom AI can transform your business.</p>
                 </div>
+                
+                <!-- Hidden field to identify form type -->
+                <input type="hidden" name="form_type" value="Free Trial Request">
                 
                 <div class="form-group">
                     <label for="name">Full Name</label>
@@ -1094,6 +1100,10 @@
                 <div class="form-group">
                     <label for="phone">Phone Number (Optional)</label>
                     <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
+                    <label for="trialMessage">What would you like our AI to help with? (Optional)</label>
+                    <textarea id="trialMessage" name="message" placeholder="Briefly describe your business needs..." rows="3"></textarea>
                 </div>
                 <button type="submit" class="submit-btn">Start Free Trial</button>
             </form>
@@ -1399,50 +1409,12 @@
         }
 
         // Form submissions
-        function submitTrial(event) {
-            event.preventDefault();
-            
-            const formData = new FormData(event.target);
-            const data = {
-                type: 'Free Trial Request',
-                name: formData.get('name'),
-                company: formData.get('company'),
-                email: formData.get('email'),
-                phone: formData.get('phone') || 'Not provided'
-            };
-
-            // Here you would integrate with your email service
-            console.log('Trial form data:', data);
-            
-            // Show success modal
-            document.getElementById('successModal').style.display = 'block';
-            
-            // Reset form
-            event.target.reset();
-        }
-
-        function submitPricingInquiry(event) {
-            event.preventDefault();
-            
-            const formData = new FormData(event.target);
-            const data = {
-                type: 'Pricing Inquiry',
-                name: formData.get('name'),
-                company: formData.get('company'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                services: formData.get('services'),
-                details: formData.get('details')
-            };
-
-            // Here you would integrate with your email service
-            console.log('Pricing inquiry data:', data);
-            
-            // Show success modal
-            document.getElementById('successModal').style.display = 'block';
-            
-            // Reset form
-            event.target.reset();
+        function showSuccessModal(event) {
+            // Let the form submit naturally to Formspree
+            // Then show success modal after a brief delay
+            setTimeout(() => {
+                document.getElementById('successModal').style.display = 'block';
+            }, 100);
         }
 
         function closeModal() {
