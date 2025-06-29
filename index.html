@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VoiceFlow AI - AI Agents for Business</title>
+    <title>KunFyaAI - Custom AI Agents for Business</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -13,9 +14,10 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
             line-height: 1.6;
-            color: #1a1a1a;
-            background: #ffffff;
+            overflow-x: hidden;
         }
 
         .container {
@@ -24,32 +26,29 @@
             padding: 0 24px;
         }
 
-        /* Navigation */
-        nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+        /* Header */
+        header {
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 20px 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid #e5e5e5;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .nav-container {
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 80px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
         }
 
         .logo {
             font-size: 24px;
-            font-weight: 600;
-            color: #1a1a1a;
-            text-decoration: none;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
@@ -60,515 +59,544 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #666;
+            color: rgba(255, 255, 255, 0.8);
             font-weight: 500;
-            font-size: 16px;
-            transition: color 0.2s ease;
+            font-size: 15px;
+            transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: #1a1a1a;
+            color: #ffffff;
         }
 
-        .nav-cta {
-            background: #1a1a1a;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
+        .cta-button {
+            background: #ffffff;
+            color: #000000;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             text-decoration: none;
-            font-weight: 500;
-            transition: background 0.2s ease;
+            display: inline-block;
         }
 
-        .nav-cta:hover {
-            background: #333;
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-1px);
         }
 
         /* Hero Section */
         .hero {
             padding: 160px 0 120px;
             text-align: center;
-            background: #ffffff;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(79, 70, 229, 0.15) 0%, transparent 70%);
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a"><stop offset="0%" stop-color="%234f46e5"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs><circle cx="500" cy="300" r="200" fill="url(%23a)"/><circle cx="200" cy="700" r="150" fill="url(%23a)" opacity="0.5"/><circle cx="800" cy="600" r="100" fill="url(%23a)" opacity="0.3"/></svg>') center/cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
         }
 
         .hero h1 {
-            font-size: 56px;
-            font-weight: 600;
-            line-height: 1.1;
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 700;
             margin-bottom: 24px;
-            color: #1a1a1a;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            letter-spacing: -2px;
+            line-height: 1.1;
         }
 
-        .hero p {
+        .hero-subtitle {
             font-size: 20px;
-            color: #666;
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 40px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.5;
         }
 
-        .hero-buttons {
+        .hero-cta {
             display: flex;
             gap: 16px;
             justify-content: center;
+            align-items: center;
             flex-wrap: wrap;
         }
 
-        .btn-primary {
-            background: #1a1a1a;
-            color: white;
+        .primary-button {
+            background: #ffffff;
+            color: #0a0a0a;
             padding: 16px 32px;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
             font-weight: 600;
+            font-size: 16px;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            transition: background 0.2s ease;
+            transition: all 0.3s ease;
         }
 
-        .btn-primary:hover {
-            background: #333;
+        .primary-button:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
         }
 
-        .btn-secondary {
+        .secondary-button {
             background: transparent;
-            color: #1a1a1a;
+            color: #ffffff;
             padding: 16px 32px;
-            border: 2px solid #e5e5e5;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 8px;
-            font-size: 16px;
             font-weight: 600;
+            font-size: 16px;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
 
-        .btn-secondary:hover {
-            border-color: #1a1a1a;
+        .secondary-button:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* Stats Section */
         .stats {
             padding: 80px 0;
-            background: #f8f9fa;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 48px;
+            gap: 40px;
             text-align: center;
         }
 
         .stat-item {
-            padding: 0;
+            padding: 20px;
         }
 
         .stat-number {
             font-size: 48px;
             font-weight: 700;
-            color: #1a1a1a;
             margin-bottom: 8px;
-            line-height: 1;
+            background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-label {
-            color: #666;
             font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
             font-weight: 500;
         }
 
-        /* Problem Section */
-        .problem {
+        /* Features Section */
+        .features {
             padding: 120px 0;
-            background: #ffffff;
         }
 
-        .problem-content {
-            max-width: 800px;
-            margin: 0 auto;
+        .section-header {
             text-align: center;
+            margin-bottom: 80px;
         }
 
-        .problem h2 {
-            font-size: 40px;
+        .section-number {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
             font-weight: 600;
-            color: #1a1a1a;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            font-size: clamp(36px, 6vw, 48px);
+            font-weight: 700;
             margin-bottom: 24px;
+            letter-spacing: -1px;
             line-height: 1.2;
         }
 
-        .problem p {
-            font-size: 20px;
-            color: #666;
-            margin-bottom: 48px;
-        }
-
-        .problem-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 32px;
-            text-align: left;
-            margin-top: 48px;
-        }
-
-        .problem-item {
-            padding: 32px;
-            background: #f8f9fa;
-            border-radius: 12px;
-        }
-
-        .problem-item h3 {
+        .section-description {
             font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-title {
+            font-size: 20px;
             font-weight: 600;
-            color: #1a1a1a;
             margin-bottom: 12px;
         }
 
-        .problem-item p {
-            font-size: 16px;
-            color: #666;
-            margin: 0;
+        .feature-description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
         }
 
-        /* Solution Section */
-        .solution {
+        /* Demo Section */
+        .demo {
             padding: 120px 0;
-            background: #1a1a1a;
-            color: white;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .solution-content {
+        .demo-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 60px;
             align-items: center;
         }
 
-        .solution h2 {
-            font-size: 40px;
-            font-weight: 600;
+        .demo-content h3 {
+            font-size: 32px;
+            font-weight: 700;
             margin-bottom: 24px;
-            line-height: 1.2;
+            letter-spacing: -0.5px;
         }
 
-        .solution p {
+        .demo-content p {
             font-size: 18px;
-            color: #ccc;
+            color: rgba(255, 255, 255, 0.7);
             margin-bottom: 32px;
+            line-height: 1.6;
         }
 
-        .solution-features {
-            list-style: none;
-            margin-bottom: 40px;
+        .chatbot-demo {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
-        .solution-features li {
-            padding: 12px 0;
-            font-size: 16px;
-            color: #ccc;
-            border-bottom: 1px solid #333;
-        }
-
-        .solution-features li:last-child {
-            border-bottom: none;
-        }
-
-        .solution-features li:before {
-            content: "✓";
-            color: #4ade80;
-            font-weight: bold;
-            margin-right: 12px;
-        }
-
-        .demo-interface {
-            background: #2a2a2a;
-            border-radius: 12px;
-            padding: 24px;
-            border: 1px solid #333;
-        }
-
-        .demo-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #333;
-        }
-
-        .demo-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: white;
-        }
-
-        .demo-status {
-            margin-left: auto;
-            background: #4ade80;
-            color: #1a1a1a;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
+        .chat-header {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             font-weight: 600;
         }
 
         .chat-messages {
             height: 300px;
             overflow-y: auto;
-            margin-bottom: 16px;
+            padding: 24px;
         }
 
         .message {
             margin-bottom: 16px;
             padding: 12px 16px;
-            border-radius: 8px;
-            max-width: 80%;
+            border-radius: 12px;
+            max-width: 85%;
             font-size: 14px;
             line-height: 1.4;
         }
 
         .user-message {
-            background: #3b3b3b;
-            color: white;
+            background: rgba(255, 255, 255, 0.1);
             margin-left: auto;
+            text-align: right;
         }
 
-        .ai-message {
-            background: #f8f9fa;
-            color: #1a1a1a;
-            margin-right: auto;
+        .bot-message {
+            background: rgba(79, 70, 229, 0.3);
+            border: 1px solid rgba(79, 70, 229, 0.4);
         }
 
-        .demo-input {
+        .chat-input {
             display: flex;
-            gap: 8px;
+            padding: 16px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            gap: 12px;
         }
 
-        .demo-input input {
+        .chat-input input {
             flex: 1;
-            padding: 12px 16px;
-            border: 1px solid #333;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 8px;
-            background: #3b3b3b;
-            color: white;
+            padding: 12px 16px;
+            color: #ffffff;
             font-size: 14px;
         }
 
-        .demo-input input::placeholder {
-            color: #999;
+        .chat-input input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
 
-        .demo-input button {
-            padding: 12px 20px;
+        .chat-input input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .chat-send {
+            background: #ffffff;
+            color: #0a0a0a;
             border: none;
             border-radius: 8px;
-            background: #4ade80;
-            color: #1a1a1a;
+            padding: 12px 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s ease;
+            font-size: 14px;
         }
 
-        .demo-input button:hover {
-            background: #22c55e;
-        }
-
-        /* Services Section */
-        .services {
+        /* Charts */
+        .chart-section {
             padding: 120px 0;
-            background: #ffffff;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .services h2 {
-            font-size: 40px;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 80px;
-            color: #1a1a1a;
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 48px;
-        }
-
-        .service-card {
-            padding: 48px 32px;
-            background: #ffffff;
-            border: 1px solid #e5e5e5;
-            border-radius: 12px;
-            text-align: center;
-            transition: border-color 0.2s ease;
-        }
-
-        .service-card:hover {
-            border-color: #1a1a1a;
-        }
-
-        .service-icon {
-            width: 64px;
-            height: 64px;
-            background: #f8f9fa;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin: 0 auto 24px;
-        }
-
-        .service-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 16px;
-        }
-
-        .service-description {
-            color: #666;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        /* CTA Section */
-        .final-cta {
+        /* Trial Section */
+        .trial {
             padding: 120px 0;
-            background: #f8f9fa;
-            text-align: center;
         }
 
-        .final-cta h2 {
-            font-size: 40px;
-            font-weight: 600;
-            color: #1a1a1a;
+        .trial-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
             margin-bottom: 24px;
         }
 
-        .final-cta p {
-            font-size: 20px;
-            color: #666;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            color: #ffffff;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #ffffff;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 8px;
+            padding: 16px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
         }
 
         /* Footer */
         footer {
-            background: #1a1a1a;
-            color: #ccc;
-            padding: 48px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 60px 0;
             text-align: center;
         }
 
         .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 32px;
-            margin-bottom: 32px;
-            text-align: left;
+            color: rgba(255, 255, 255, 0.6);
         }
 
-        .footer-section h3 {
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: rgba(10, 10, 10, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 15% auto;
+            padding: 40px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            backdrop-filter: blur(20px);
+        }
+
+        .modal-content h2 {
+            color: #ffffff;
             margin-bottom: 16px;
         }
 
-        .footer-section a {
-            color: #ccc;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            transition: color 0.2s ease;
+        .modal-content p {
+            color: rgba(255, 255, 255, 0.8);
         }
 
-        .footer-section a:hover {
-            color: white;
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.6);
         }
 
-        .footer-bottom {
-            border-top: 1px solid #333;
-            padding-top: 32px;
-            text-align: center;
+        .close:hover {
+            color: #ffffff;
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 40px;
-            }
-
-            .hero p {
-                font-size: 18px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .solution-content {
-                grid-template-columns: 1fr;
-                gap: 48px;
-            }
-
             .nav-links {
                 display: none;
             }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 32px;
+            
+            .demo-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
             }
-
-            .problem h2,
-            .solution h2,
-            .services h2,
-            .final-cta h2 {
-                font-size: 32px;
+            
+            .hero-cta {
+                flex-direction: column;
             }
         }
 
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="logo">VoiceFlow AI</a>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">KunFyaAI</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#problem">Problem</a></li>
-                <li><a href="#solution">Solution</a></li>
-                <li><a href="#services">Services</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#pricing">Pricing</a></li>
             </ul>
-            <a href="#contact" class="nav-cta">Get Started</a>
-        </div>
-    </nav>
+            <a href="#trial" class="cta-button">Start Free Trial</a>
+        </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
         <div class="container">
-            <h1>AI Agents That Never Miss a Call</h1>
-            <p>Recover lost revenue from missed calls and abandoned chats. Our AI agents handle every customer interaction, 24/7, so you never lose a sale again.</p>
-            <div class="hero-buttons">
-                <a href="#solution" class="btn-primary">See How It Works</a>
-                <a href="#demo" class="btn-secondary">Try Demo</a>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>🥇</span>
+                    <span>Custom AI Solutions</span>
+                </div>
+                <h1>The #1 AI Agent<br>for Business Growth</h1>
+                <p class="hero-subtitle">Custom AI phone agents and chatbots that work 24/7. Never miss a call, never lose a sale. Built specifically for your business needs.</p>
+                <div class="hero-cta">
+                    <a href="#trial" class="primary-button">Start Free Trial</a>
+                    <a href="#demo" class="secondary-button">See Demo</a>
+                </div>
             </div>
         </div>
     </section>
@@ -578,123 +606,134 @@
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <div class="stat-number">40%</div>
-                    <div class="stat-label">Revenue Recovery</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">95%</div>
-                    <div class="stat-label">Call Answer Rate</div>
-                </div>
-                <div class="stat-item">
                     <div class="stat-number">24/7</div>
                     <div class="stat-label">Always Available</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">3x</div>
-                    <div class="stat-label">Faster Response</div>
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Customer Satisfaction</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">60%</div>
+                    <div class="stat-label">Cost Reduction</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Custom Solutions</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Problem Section -->
-    <section class="problem" id="problem">
+    <!-- Features Section -->
+    <section id="features" class="features">
         <div class="container">
-            <div class="problem-content">
-                <h2>Your Business Is Losing Money Every Day</h2>
-                <p>Every missed call, every unanswered chat, every delayed response is revenue walking out the door. Traditional customer service can't keep up with modern expectations.</p>
-                
-                <div class="problem-list">
-                    <div class="problem-item">
-                        <h3>Missed Opportunities</h3>
-                        <p>Studies show businesses miss 62% of incoming calls during peak hours, losing potential customers to competitors.</p>
-                    </div>
-                    <div class="problem-item">
-                        <h3>High Labor Costs</h3>
-                        <p>Hiring and training customer service staff is expensive, and human agents can only handle one conversation at a time.</p>
-                    </div>
-                    <div class="problem-item">
-                        <h3>Inconsistent Service</h3>
-                        <p>Human agents have bad days, take breaks, and provide inconsistent information, leading to frustrated customers.</p>
-                    </div>
-                    <div class="problem-item">
-                        <h3>Limited Availability</h3>
-                        <p>Your customers expect 24/7 support, but traditional staffing models make round-the-clock coverage prohibitively expensive.</p>
-                    </div>
+            <div class="section-header">
+                <div class="section-number">01</div>
+                <h2 class="section-title">Complete AI capabilities.<br>Total control.</h2>
+                <p class="section-description">KunFyaAI builds custom AI agents specifically for your business. From phone calls to chat support, we handle it all with industry-leading performance.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3 class="feature-title">100% Custom AI Solutions</h3>
+                    <p class="feature-description">Every AI agent is built specifically for your business. No generic templates - we create AI that understands your industry, products, and customers perfectly.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">AI Phone & Chat Combined</h3>
+                    <p class="feature-description">Complete communication coverage with AI phone agents AND intelligent chatbots. Handle calls, appointments, orders, and support across all channels.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">Price Match Guarantee</h3>
+                    <p class="feature-description">We match any competitor's pricing while delivering superior custom AI solutions. Get premium quality without premium prices.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title">Never Miss Business</h3>
+                    <p class="feature-description">Your AI agents work around the clock, capturing leads, taking orders, and booking appointments even when you're sleeping.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Solution Section -->
-    <section class="solution" id="solution">
+    <!-- Demo Section -->
+    <section id="demo" class="demo">
         <div class="container">
-            <div class="solution-content">
-                <div>
-                    <h2>Meet Your AI Customer Service Team</h2>
-                    <p>Our AI agents handle phone calls, live chat, and customer inquiries with human-level conversation skills. They learn your business, follow your processes, and never miss an opportunity.</p>
+            <div class="section-header">
+                <div class="section-number">02</div>
+                <h2 class="section-title">See KunFyaAI in action</h2>
+            </div>
+            
+            <div class="demo-container">
+                <div class="demo-content">
+                    <h3>Interactive AI Demo</h3>
+                    <p>Try our AI assistant below. Ask about our services, pricing, or how we can help your business. This showcases the intelligence we build into every custom solution.</p>
                     
-                    <ul class="solution-features">
-                        <li>Answer every call and chat instantly</li>
-                        <li>Qualify leads and schedule appointments</li>
-                        <li>Handle multiple conversations simultaneously</li>
-                        <li>Provide consistent, accurate information</li>
-                        <li>Escalate complex issues to human agents</li>
-                        <li>Work 24/7 without breaks or sick days</li>
-                    </ul>
-
-                    <a href="#services" class="btn-primary">Learn More</a>
+                    <div class="chart-container">
+                        <h4 style="margin-bottom: 24px; font-size: 18px;">Business Impact Analysis</h4>
+                        <canvas id="impactChart" width="400" height="200"></canvas>
+                    </div>
                 </div>
-
-                <div class="demo-interface" id="demo">
-                    <div class="demo-header">
-                        <div class="demo-title">Live Chat Demo</div>
-                        <div class="demo-status">Online</div>
+                
+                <div class="chatbot-demo">
+                    <div class="chat-header">
+                        KunFyaAI Assistant
                     </div>
                     <div class="chat-messages" id="chatMessages">
-                        <div class="message ai-message">
-                            Hi! I'm Sarah, your AI assistant. I can help you learn about our services, answer questions, or connect you with our team. How can I help you today?
+                        <div class="message bot-message">
+                            Hi! I'm a demo of KunFyaAI's custom AI technology. Ask me about our services, pricing, or how we can transform your business!
                         </div>
                     </div>
-                    <div class="demo-input">
-                        <input type="text" id="messageInput" placeholder="Type your message...">
-                        <button onclick="sendMessage()">Send</button>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="Ask me anything..." />
+                        <button class="chat-send" onclick="sendMessage()">Send</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
+    <!-- Chart Section -->
+    <section class="chart-section">
         <div class="container">
-            <h2>Complete AI Customer Service Solutions</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">📞</div>
-                    <h3 class="service-title">AI Phone Agents</h3>
-                    <p class="service-description">Advanced voice AI that handles inbound calls with natural conversation, lead qualification, appointment scheduling, and seamless human handoffs when needed.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💬</div>
-                    <h3 class="service-title">Smart Chat Agents</h3>
-                    <p class="service-description">Website chatbots that engage visitors, answer questions, capture leads, and guide customers through your sales process with intelligent conversation flows.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔄</div>
-                    <h3 class="service-title">Lead Recovery System</h3>
-                    <p class="service-description">Automated follow-up system that contacts missed calls and abandoned chats to recover lost opportunities and convert them into customers.</p>
-                </div>
+            <div class="section-header">
+                <div class="section-number">03</div>
+                <h2 class="section-title">ROI Comparison</h2>
+                <p class="section-description">See the dramatic difference AI automation makes for your business revenue and costs.</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="roiChart" width="400" height="200"></canvas>
             </div>
         </div>
     </section>
 
-    <!-- Final CTA -->
-    <section class="final-cta" id="contact">
+    <!-- Trial Section -->
+    <section id="trial" class="trial">
         <div class="container">
-            <h2>Ready to Stop Losing Customers?</h2>
-            <p>See how our AI agents can transform your customer service and recover lost revenue. Setup takes less than 24 hours.</p>
-            <a href="#" class="btn-primary">Start Your Free Trial</a>
+            <div class="section-header">
+                <div class="section-number">04</div>
+                <h2 class="section-title">Get the #1 AI agent<br>for your business</h2>
+                <p class="section-description">Start your free trial today. No commitment required. See how custom AI can transform your business in just 14 days.</p>
+            </div>
+            
+            <form class="trial-form" onsubmit="submitTrial(event)">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="company" placeholder="Enter your company name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number (Optional)</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                </div>
+                <button type="submit" class="submit-btn">Start Free Trial</button>
+            </form>
         </div>
     </section>
 
@@ -702,107 +741,41 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Product</h3>
-                    <a href="#">AI Phone Agents</a>
-                    <a href="#">Smart Chatbots</a>
-                    <a href="#">Lead Recovery</a>
-                    <a href="#">Analytics</a>
-                </div>
-                <div class="footer-section">
-                    <h3>Company</h3>
-                    <a href="#">About Us</a>
-                    <a href="#">Case Studies</a>
-                    <a href="#">Pricing</a>
-                    <a href="#">Contact</a>
-                </div>
-                <div class="footer-section">
-                    <h3>Resources</h3>
-                    <a href="#">Documentation</a>
-                    <a href="#">API Reference</a>
-                    <a href="#">Support</a>
-                    <a href="#">Blog</a>
-                </div>
-                <div class="footer-section">
-                    <h3>Legal</h3>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Security</a>
-                    <a href="#">Compliance</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 VoiceFlow AI. All rights reserved.</p>
+                <div class="logo" style="margin-bottom: 16px; font-size: 20px;">KunFyaAI</div>
+                <p>Custom AI agents for business growth</p>
+                <p style="margin-top: 24px; font-size: 14px;">© 2025 KunFyaAI. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Thank You!</h2>
+            <p>Your free trial request has been submitted successfully. We'll contact you within 24 hours to set up your custom AI demo.</p>
+        </div>
+    </div>
+
     <script>
-        // Demo Chat Functionality
-        const aiResponses = [
-            "That's a great question! Our AI agents can handle unlimited simultaneous conversations while maintaining quality. Would you like to know more about our phone or chat solutions?",
-            "Absolutely! We typically see businesses recover 40% of their lost revenue within the first 30 days. Our AI agents never miss a call or chat, ensuring every opportunity is captured.",
-            "Our setup is incredibly fast - most businesses are live within 24 hours. We handle all the technical integration while you focus on your business. Would you like to schedule a demo?",
-            "Yes, our AI agents integrate seamlessly with popular CRM systems like Salesforce, HubSpot, and Pipedrive. All conversations and lead data sync automatically.",
-            "Security is our top priority. We use enterprise-grade encryption, comply with GDPR and HIPAA, and never store sensitive customer data. Your business information is completely secure.",
-            "Our pricing is transparent and based on your call/chat volume. Most small businesses start around $200/month and see immediate ROI. Would you like a custom quote for your business?",
-            "Perfect! I can connect you with our team for a personalized demo. They'll show you exactly how our AI agents would work for your specific business. What's the best time to reach you?"
-        ];
+        // Chatbot functionality
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
 
-        let responseIndex = 0;
-
-        function sendMessage() {
-            const input = document.getElementById('messageInput');
-            const chatMessages = document.getElementById('chatMessages');
-            
-            if (input.value.trim() === '') return;
-            
-            // Add user message
-            const userMessage = document.createElement('div');
-            userMessage.className = 'message user-message';
-            userMessage.textContent = input.value;
-            chatMessages.appendChild(userMessage);
-            
-            // Clear input
-            input.value = '';
-            
-            // Simulate AI response after delay
-            setTimeout(() => {
-                const aiMessage = document.createElement('div');
-                aiMessage.className = 'message ai-message';
-                aiMessage.textContent = aiResponses[responseIndex % aiResponses.length];
-                chatMessages.appendChild(aiMessage);
-                
-                responseIndex++;
-                
-                // Scroll to bottom
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 1000);
-            
-            // Scroll to bottom
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        // Allow Enter key to send message
-        document.getElementById('messageInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+        const responses = {
+            'hello': 'Hello! Welcome to KunFyaAI. How can I help you today?',
+            'hi': 'Hi there! I\'m here to answer questions about our custom AI solutions.',
+            'pricing': 'We offer competitive pricing starting at $297/month and match any competitor\'s rates! Our AI solutions include both phone agents and chatbots. Would you like to start a free trial?',
+            'price': 'We match any competitor\'s pricing! Our custom AI solutions start from $297/month. This includes both phone AI and chatbots tailored to your business. Ready for a free trial?',
+            'cost': 'Our pricing is competitive and we guarantee to match any legitimate competitor quote. Custom AI solutions start at $297/month. Want to see it in action with a free trial?',
+            'services': 'KunFyaAI creates 100% custom AI solutions including: 24/7 AI phone agents, intelligent website chatbots, appointment scheduling, order processing, and customer support - all customized for YOUR specific business needs!',
+            'phone': 'Our AI phone agents handle calls 24/7, take messages, book appointments, process orders, answer questions, and transfer important calls to you. They never miss a call and work exactly like your best employee!',
+            'chat': 'Our AI chatbots integrate seamlessly into your website, handling customer inquiries, capturing leads, providing product information, and guiding visitors through your sales funnel.',
+            'custom': 'Every AI we build is 100% custom for your business. We train it on your specific industry, products, services, policies, and processes. No generic templates - it\'s built specifically for YOUR business!',
+            'trial': 'Our free trial includes a fully custom AI demo built for your business, complete setup assistance, and 14 days of testing with no commitment. Ready to transform your business?',
+            'help': 'I can help you learn about our custom AI phone and chat solutions, competitive pricing (we match competitors!), free trial options, or answer specific questions about growing your business with AI.',
+            'benefits': 'AI agents help you: Capture every lead (never miss calls), reduce staffing costs, work 24/7, improve customer satisfaction, increase sales, and scale without hiring more people!',
+            'different': 'Unlike generic AI tools, we build completely custom solutions for YOUR specific business. We offer both phone AND chat AI, provide industry-specific training, and guarantee to match any competitor\'s pricing!',
+            'appointment': 'Our AI schedules appointments automatically by checking your calendar, asking qualifying questions, sending confirmations, handling rescheduling, and even sending reminders!',
+            'order': 'Yes! Our AI takes orders, processes payments, checks inventory, calculates totals, handles special requests, and sends confirmations - just like your best sales person.',
+            'support': 'Our AI provides instant 24/7 customer support, answering questions, troubleshooting issues, escalating complex problems to humans, and ensuring
