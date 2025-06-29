@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceFlow AI - AI Agents for Business</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: #1a1a1a;
+        }
+
+        .nav-cta {
+            background: #1a1a1a;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background: #333;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 120px;
+            text-align: center;
+            background: #ffffff;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #1a1a1a;
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: #333;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #1a1a1a;
+            padding: 16px 32px;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: #1a1a1a;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 48px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 0;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 120px 0;
+            background: #ffffff;
+        }
+
+        .problem-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .problem h2 {
+            font-size: 40px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .problem p {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 48px;
+        }
+
+        .problem-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            text-align: left;
+            margin-top: 48px;
+        }
+
+        .problem-item {
+            padding: 32px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .problem-item h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .problem-item p {
+            font-size: 16px;
+            color: #666;
+            margin: 0;
+        }
+
+        /* Solution Section */
+        .solution {
+            padding: 120px 0;
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .solution-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .solution h2 {
+            font-size: 40px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .solution p {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 32px;
+        }
+
+        .solution-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .solution-features li {
+            padding: 12px 0;
+            font-size: 16px;
+            color: #ccc;
+            border-bottom: 1px solid #333;
+        }
+
+        .solution-features li:last-child {
+            border-bottom: none;
+        }
+
+        .solution-features li:before {
+            content: "✓";
+            color: #4ade80;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        .demo-interface {
+            background: #2a2a2a;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #333;
+        }
+
+        .demo-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #333;
+        }
+
+        .demo-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .demo-status {
+            margin-left: auto;
+            background: #4ade80;
+            color: #1a1a1a;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 16px;
+        }
+
+        .message {
+            margin-bottom: 16px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            max-width: 80%;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .user-message {
+            background: #3b3b3b;
+            color: white;
+            margin-left: auto;
+        }
+
+        .ai-message {
+            background: #f8f9fa;
+            color: #1a1a1a;
+            margin-right: auto;
+        }
+
+        .demo-input {
+            display: flex;
+            gap: 8px;
+        }
+
+        .demo-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #3b3b3b;
+            color: white;
+            font-size: 14px;
+        }
+
+        .demo-input input::placeholder {
+            color: #999;
+        }
+
+        .demo-input button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #4ade80;
+            color: #1a1a1a;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .demo-input button:hover {
+            background: #22c55e;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 120px 0;
+            background: #ffffff;
+        }
+
+        .services h2 {
+            font-size: 40px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 80px;
+            color: #1a1a1a;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 48px;
+        }
+
+        .service-card {
+            padding: 48px 32px;
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            text-align: center;
+            transition: border-color 0.2s ease;
+        }
+
+        .service-card:hover {
+            border-color: #1a1a1a;
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 24px;
+        }
+
+        .service-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        .service-description {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .final-cta {
+            padding: 120px 0;
+            background: #f8f9fa;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 40px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+        }
+
+        .final-cta p {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: #ccc;
+            padding: 48px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-bottom: 32px;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 32px;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .solution-content {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+
+            .problem h2,
+            .solution h2,
+            .services h2,
+            .final-cta h2 {
+                font-size: 32px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">VoiceFlow AI</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#problem">Problem</a></li>
+                <li><a href="#solution">Solution</a></li>
+                <li><a href="#services">Services</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>AI Agents That Never Miss a Call</h1>
+            <p>Recover lost revenue from missed calls and abandoned chats. Our AI agents handle every customer interaction, 24/7, so you never lose a sale again.</p>
+            <div class="hero-buttons">
+                <a href="#solution" class="btn-primary">See How It Works</a>
+                <a href="#demo" class="btn-secondary">Try Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">40%</div>
+                    <div class="stat-label">Revenue Recovery</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Call Answer Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Always Available</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3x</div>
+                    <div class="stat-label">Faster Response</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="problem-content">
+                <h2>Your Business Is Losing Money Every Day</h2>
+                <p>Every missed call, every unanswered chat, every delayed response is revenue walking out the door. Traditional customer service can't keep up with modern expectations.</p>
+                
+                <div class="problem-list">
+                    <div class="problem-item">
+                        <h3>Missed Opportunities</h3>
+                        <p>Studies show businesses miss 62% of incoming calls during peak hours, losing potential customers to competitors.</p>
+                    </div>
+                    <div class="problem-item">
+                        <h3>High Labor Costs</h3>
+                        <p>Hiring and training customer service staff is expensive, and human agents can only handle one conversation at a time.</p>
+                    </div>
+                    <div class="problem-item">
+                        <h3>Inconsistent Service</h3>
+                        <p>Human agents have bad days, take breaks, and provide inconsistent information, leading to frustrated customers.</p>
+                    </div>
+                    <div class="problem-item">
+                        <h3>Limited Availability</h3>
+                        <p>Your customers expect 24/7 support, but traditional staffing models make round-the-clock coverage prohibitively expensive.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="solution-content">
+                <div>
+                    <h2>Meet Your AI Customer Service Team</h2>
+                    <p>Our AI agents handle phone calls, live chat, and customer inquiries with human-level conversation skills. They learn your business, follow your processes, and never miss an opportunity.</p>
+                    
+                    <ul class="solution-features">
+                        <li>Answer every call and chat instantly</li>
+                        <li>Qualify leads and schedule appointments</li>
+                        <li>Handle multiple conversations simultaneously</li>
+                        <li>Provide consistent, accurate information</li>
+                        <li>Escalate complex issues to human agents</li>
+                        <li>Work 24/7 without breaks or sick days</li>
+                    </ul>
+
+                    <a href="#services" class="btn-primary">Learn More</a>
+                </div>
+
+                <div class="demo-interface" id="demo">
+                    <div class="demo-header">
+                        <div class="demo-title">Live Chat Demo</div>
+                        <div class="demo-status">Online</div>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message ai-message">
+                            Hi! I'm Sarah, your AI assistant. I can help you learn about our services, answer questions, or connect you with our team. How can I help you today?
+                        </div>
+                    </div>
+                    <div class="demo-input">
+                        <input type="text" id="messageInput" placeholder="Type your message...">
+                        <button onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Complete AI Customer Service Solutions</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">📞</div>
+                    <h3 class="service-title">AI Phone Agents</h3>
+                    <p class="service-description">Advanced voice AI that handles inbound calls with natural conversation, lead qualification, appointment scheduling, and seamless human handoffs when needed.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💬</div>
+                    <h3 class="service-title">Smart Chat Agents</h3>
+                    <p class="service-description">Website chatbots that engage visitors, answer questions, capture leads, and guide customers through your sales process with intelligent conversation flows.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔄</div>
+                    <h3 class="service-title">Lead Recovery System</h3>
+                    <p class="service-description">Automated follow-up system that contacts missed calls and abandoned chats to recover lost opportunities and convert them into customers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta" id="contact">
+        <div class="container">
+            <h2>Ready to Stop Losing Customers?</h2>
+            <p>See how our AI agents can transform your customer service and recover lost revenue. Setup takes less than 24 hours.</p>
+            <a href="#" class="btn-primary">Start Your Free Trial</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <a href="#">AI Phone Agents</a>
+                    <a href="#">Smart Chatbots</a>
+                    <a href="#">Lead Recovery</a>
+                    <a href="#">Analytics</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <a href="#">About Us</a>
+                    <a href="#">Case Studies</a>
+                    <a href="#">Pricing</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <a href="#">Documentation</a>
+                    <a href="#">API Reference</a>
+                    <a href="#">Support</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Security</a>
+                    <a href="#">Compliance</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 VoiceFlow AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Demo Chat Functionality
+        const aiResponses = [
+            "That's a great question! Our AI agents can handle unlimited simultaneous conversations while maintaining quality. Would you like to know more about our phone or chat solutions?",
+            "Absolutely! We typically see businesses recover 40% of their lost revenue within the first 30 days. Our AI agents never miss a call or chat, ensuring every opportunity is captured.",
+            "Our setup is incredibly fast - most businesses are live within 24 hours. We handle all the technical integration while you focus on your business. Would you like to schedule a demo?",
+            "Yes, our AI agents integrate seamlessly with popular CRM systems like Salesforce, HubSpot, and Pipedrive. All conversations and lead data sync automatically.",
+            "Security is our top priority. We use enterprise-grade encryption, comply with GDPR and HIPAA, and never store sensitive customer data. Your business information is completely secure.",
+            "Our pricing is transparent and based on your call/chat volume. Most small businesses start around $200/month and see immediate ROI. Would you like a custom quote for your business?",
+            "Perfect! I can connect you with our team for a personalized demo. They'll show you exactly how our AI agents would work for your specific business. What's the best time to reach you?"
+        ];
+
+        let responseIndex = 0;
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            if (input.value.trim() === '') return;
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = input.value;
+            chatMessages.appendChild(userMessage);
+            
+            // Clear input
+            input.value = '';
+            
+            // Simulate AI response after delay
+            setTimeout(() => {
+                const aiMessage = document.createElement('div');
+                aiMessage.className = 'message ai-message';
+                aiMessage.textContent = aiResponses[responseIndex % aiResponses.length];
+                chatMessages.appendChild(aiMessage);
+                
+                responseIndex++;
+                
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Allow Enter key to send message
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
